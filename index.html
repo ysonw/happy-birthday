@@ -12,9 +12,25 @@
 </head>
 
 <body>
-<audio id="myAudio" controls>
+<audio id="myAudio" autoplay muted>
   <source src="http://music.163.com/song/media/outer/url?id=2118798488.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var audio = document.getElementById('myAudio');
+
+    var playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(function() {
+        audio.muted = false;
+      }).catch(function(error) {
+        console.log("播放被阻止: ", error);
+      });
+    }
+  });
+</script>
 <div class="container">
     <div class="one">
       <h1 class="one">
